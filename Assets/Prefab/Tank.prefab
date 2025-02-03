@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1144421105452937848}
   - component: {fileID: 2241168064093024900}
   - component: {fileID: 7471986424847602220}
+  - component: {fileID: 902779284489498345}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &7471986424847602220
 Animator:
   serializedVersion: 5
@@ -170,3 +171,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &902779284489498345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437593167522216625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99725c87400111948ae5543ff8de003e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points: []
+  _speed: 3
+  _delay: 2

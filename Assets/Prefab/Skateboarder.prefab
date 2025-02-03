@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5718678187507241238}
   - component: {fileID: 6132009704415596111}
   - component: {fileID: 8618076428605087069}
+  - component: {fileID: 3338512988291282508}
   m_Layer: 0
   m_Name: Skateboarder
   m_TagString: Untagged
@@ -169,4 +170,21 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &3338512988291282508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616805870667764792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99725c87400111948ae5543ff8de003e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points:
+  - {fileID: 0}
+  - {fileID: 0}
+  _speed: 3
+  _delay: 2
