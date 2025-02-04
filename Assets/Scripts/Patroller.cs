@@ -47,12 +47,7 @@ public class Patroller : MonoBehaviour
     
     private void NextTargetPosition()
     {
-        _numberPoint ++;
-
-        if (_numberPoint >= _points.Length)
-        {
-            _numberPoint = 0;
-        }
+        _numberPoint = ++_numberPoint % _points.Length;
 
         StartCoroutine(LingerOnGoal());
     }

@@ -72,9 +72,7 @@ public class Spawner : MonoBehaviour
     {
         float numberPointX = Random.Range(points[0].transform.position.x, points[points.Length - 1].transform.position.x);
         float numberPointY = points[0].transform.position.y;
-
-        Vector2 point = new Vector2(numberPointX, numberPointY);
         
-        return point;
+        return new Vector2(numberPointX, numberPointY);
     }
 }

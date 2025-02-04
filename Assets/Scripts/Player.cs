@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Wallet))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _forceJump;
     [SerializeField] private InputReader _inputReader;
+    [SerializeField] private GroundDetector _detector;
+    [SerializeField] private Wallet _wallet;
     
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private bool _facingRight = true;
-    private bool _isPlatform;
+    private Quaternion _lockAtTarget = Quaternion.Euler(0, 180 , 0);
 
     private void Awake()
     {
@@ -21,28 +23,22 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         _inputReader.HorizontalWasPressed += Move;
-        _inputReader.JumpWasPressed += JumpLogic;
+        _inputReader.JumpWasPressed += Jump;
     }
 
     private void OnDisable()
     {
         _inputReader.HorizontalWasPressed -= Move;
-        _inputReader.JumpWasPressed -= JumpLogic;
+        _inputReader.JumpWasPressed -= Jump;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent(out Platform _))
+        if (TryGetComponent(out Money _))
         {
-            _isPlatform = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.TryGetComponent(out Platform _))
-        {
-            _isPlatform = false;
+            _wallet.AddMoney();
+            
+            Destroy(other.gameObject);
         }
     }
 
@@ -50,32 +46,19 @@ public class Player : MonoBehaviour
     {
         _rigidbody2D.velocity = new Vector2(moveDirection * _speed, _rigidbody2D.velocity.y);
 
-        if (!_facingRight && moveDirection > 0 )
-        {
-             _facingRight = !_facingRight;
-            
-             transform.Rotate(0, 180f, 0);
-        }
-        else if (_facingRight && moveDirection < 0)
+        if (_facingRight == false && moveDirection > 0 || _facingRight && moveDirection < 0)
         {
             _facingRight = !_facingRight;
-            
-            transform.Rotate(0, 180f, 0);
+
+            transform.rotation *= _lockAtTarget;
         }
 
-        if (moveDirection > 0 || moveDirection < 0)
-        {
-            _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
-        }
-        else
-        {
-            _animator.SetBool(PlayerAnimatorData.Params.IsWalk, false);
-        }
+        _animator.SetBool(PlayerAnimatorData.Params.IsWalk, moveDirection > 0 || moveDirection < 0);
     }
 
-    private void JumpLogic()
+    private void Jump()
     {
-        if (_isPlatform)
+        if (_detector.Count > 0)
         {
             _rigidbody2D.velocity = (Vector2.up * _forceJump);
         }
