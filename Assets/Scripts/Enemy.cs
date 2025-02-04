@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Mover)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
+[RequireComponent(typeof(EnemyMover)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Scanner _scanner;
@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     private Patroller _patroller;
     private Flipper _flipper;
     
-
     private void Awake()
     {
         _patroller = GetComponent<Patroller>();
@@ -17,18 +16,18 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        LookAround();
+        LookingAround();
     }
 
-    private void LookAround()
+    private void LookingAround()
     {
-        if (_scanner.CountEnemy == 0 )
+        if (_scanner.CountEnemy > 0 )
         {
-            _patroller.ContinuePatrolling();
+            _flipper.PursueTarget(_scanner.Target);
         }
         else
         {
-            _flipper.PursueTarget(_scanner.Target);
+            _patroller.ContinuePatrolling();
         }
     }
 }

@@ -1,23 +1,20 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _forceJump;
+    [SerializeField] private float _forceJump = 9f;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private GroundDetector _detector;
     [SerializeField] private Wallet _wallet;
     
-    private Rigidbody2D _rigidbody2D;
-    private Animator _animator;
-    private bool _facingRight = true;
-    private Quaternion _lockAtTarget = Quaternion.Euler(0, 180 , 0);
+    private Jumper _jumper;
+    private Mover _mover;
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        _jumper = GetComponent<Jumper>();
+        _mover = GetComponent<Mover>();
     }
 
     private void OnEnable()
@@ -34,7 +31,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (TryGetComponent(out Money _))
+        if (other.TryGetComponent(out Money _))
         {
             _wallet.AddMoney();
             
@@ -42,25 +39,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Move(int moveDirection)
+    private void Move(int direction)
     {
-        _rigidbody2D.velocity = new Vector2(moveDirection * _speed, _rigidbody2D.velocity.y);
-
-        if (_facingRight == false && moveDirection > 0 || _facingRight && moveDirection < 0)
-        {
-            _facingRight = !_facingRight;
-
-            transform.rotation *= _lockAtTarget;
-        }
-
-        _animator.SetBool(PlayerAnimatorData.Params.IsWalk, moveDirection > 0 || moveDirection < 0);
+        _mover.Move(direction, _speed);
     }
 
     private void Jump()
     {
         if (_detector.Count > 0)
         {
-            _rigidbody2D.velocity = (Vector2.up * _forceJump);
+            _jumper.Jump(_forceJump);
         }
     }
 }

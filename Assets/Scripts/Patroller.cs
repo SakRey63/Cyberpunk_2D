@@ -10,22 +10,27 @@ public class Patroller : MonoBehaviour
     private int _numberPoint = 0;
     private float _zeroSpeed = 0;
     private Animator _animator;
-    private Mover _mover;
+    private EnemyMover _enemyMover;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _mover = GetComponent<Mover>();
+        _enemyMover = GetComponent<EnemyMover>();
     }
 
     private void OnEnable()
     {
-        _mover.EnemyWasReachingTarget += NextTargetPosition;
+        _enemyMover.EnemyWasReachingTarget += SelectTarget;
     }
 
     private void OnDisable()
     {
-        _mover.EnemyWasReachingTarget -= NextTargetPosition;
+        _enemyMover.EnemyWasReachingTarget -= SelectTarget;
+    }
+
+    private void SelectTarget()
+    {
+        StartCoroutine(LingerOnGoal());
     }
 
     private IEnumerator LingerOnGoal()
@@ -33,10 +38,12 @@ public class Patroller : MonoBehaviour
         WaitForSeconds delay = new WaitForSeconds(_delay);
         
         _animator.SetBool(PlayerAnimatorData.Params.IsWalk, false);
-
-        float tempSpeed = _speed;
+        
+       float tempSpeed = _speed;
 
         _speed = _zeroSpeed;
+        
+        NextTargetPosition();
         
         yield return delay;
 
@@ -48,12 +55,10 @@ public class Patroller : MonoBehaviour
     private void NextTargetPosition()
     {
         _numberPoint = ++_numberPoint % _points.Length;
-
-        StartCoroutine(LingerOnGoal());
     }
 
     public void ContinuePatrolling()
     {
-        _mover.Move(_points[_numberPoint].position, _speed);
+        _enemyMover.Move(_points[_numberPoint].position, _speed);
     }
 }
