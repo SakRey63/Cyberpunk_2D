@@ -57,18 +57,10 @@ public class Spawner : MonoBehaviour
 
     private void GetAction(Money money)
     {
-        money.FoundMe += ReleaseMoney;
-        
         money.transform.position = RandomPositionMoney(GetPlatform());
         money.gameObject.SetActive(true);
     }
-
-    private void ReleaseMoney(Money money)
-    {
-        money.FoundMe -= ReleaseMoney;
-        
-        _pool.Release(money);
-    }
+    
     private Transform[] GetPlatform()
     {
         int index = Random.Range(0, _transforms.Count);

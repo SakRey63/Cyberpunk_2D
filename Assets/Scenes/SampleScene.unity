@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -842,6 +843,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69960ecaced21e445990fd13b53d8f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &566474648
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +867,6 @@ GameObject:
   - component: {fileID: 566474652}
   - component: {fileID: 566474651}
   - component: {fileID: 566474650}
-  - component: {fileID: 566474649}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -862,20 +874,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &566474649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566474648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8645974a5caa6b141a807ff403610661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _counteMoney: 0
-  _text: {fileID: 427209175}
 --- !u!114 &566474650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,7 +951,7 @@ RectTransform:
   m_Children:
   - {fileID: 427209177}
   - {fileID: 697656094}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1953618874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4976,7 +4974,7 @@ MonoBehaviour:
   _money: {fileID: -2854864148944505324, guid: 0d3622b2993262b4c93664784ea7acad, type: 3}
   _poolCapacity: 5
   _poolMaxSize: 10
-  _delay: 2
+  _delay: 1.5
 --- !u!4 &1953618874
 Transform:
   m_ObjectHideFlags: 0
@@ -4993,6 +4991,7 @@ Transform:
   - {fileID: 2108828155}
   - {fileID: 1475147543}
   - {fileID: 1814078954}
+  - {fileID: 566474653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108828154
@@ -5246,6 +5245,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 635461696703742281, guid: a6b36374a503cdb47b71723f4acb1d6a, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 635461696703742281, guid: a6b36374a503cdb47b71723f4acb1d6a, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 48201447}
+    - target: {fileID: 635461696703742281, guid: a6b36374a503cdb47b71723f4acb1d6a, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 1049239536}
+    - target: {fileID: 3346542512064699190, guid: a6b36374a503cdb47b71723f4acb1d6a, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4209025466137117084, guid: a6b36374a503cdb47b71723f4acb1d6a, type: 3}
       propertyPath: _points.Array.size
       value: 2
@@ -5367,6 +5382,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skateboarder
       objectReference: {fileID: 0}
+    - target: {fileID: 7475631043249572953, guid: 3f7c430746214624b9da17e83441c526, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644527804912752463, guid: 3f7c430746214624b9da17e83441c526, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644527804912752463, guid: 3f7c430746214624b9da17e83441c526, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 767186179}
+    - target: {fileID: 8644527804912752463, guid: 3f7c430746214624b9da17e83441c526, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 30914520}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5421,9 +5452,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3489119022985228574, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+      propertyPath: _speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489119022985228574, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
       propertyPath: _wallet
       value: 
-      objectReference: {fileID: 566474649}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489119022985228574, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+      propertyPath: _forceJump
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489119022985228574, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+      propertyPath: _inputReader
+      value: 
+      objectReference: {fileID: 519420033}
+    - target: {fileID: 5343058980870187351, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 427209175}
     - target: {fileID: 5930136278923926607, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5450,6 +5497,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 600649264}
     - target: {fileID: 902779284489498345, guid: 5327c442251817748b4c67671cdf9243, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 1305883934}
+    - target: {fileID: 2479764147957140563, guid: 5327c442251817748b4c67671cdf9243, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479764147957140563, guid: 5327c442251817748b4c67671cdf9243, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 600649264}
+    - target: {fileID: 2479764147957140563, guid: 5327c442251817748b4c67671cdf9243, type: 3}
       propertyPath: _points.Array.data[1]
       value: 
       objectReference: {fileID: 1305883934}
@@ -5493,6 +5552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5354432597165363235, guid: 5327c442251817748b4c67671cdf9243, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6437593167522216625, guid: 5327c442251817748b4c67671cdf9243, type: 3}
       propertyPath: m_Name
       value: Tank
@@ -5515,5 +5578,4 @@ SceneRoots:
   - {fileID: 5222445507458330395}
   - {fileID: 1629583343}
   - {fileID: 1953618874}
-  - {fileID: 566474653}
   - {fileID: 1439751666}

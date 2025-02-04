@@ -1,77 +1,64 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Mover)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform[] _points;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _delay = 2.0f;
-
-    private int _numberPoint = 0;
-    private float _epsilon = 0.1f;
-    private SpriteRenderer _renderer;
+    [SerializeField] private float _observationRadius = 5.0f;
+    
     private Animator _animator;
+    private Patroller _patroller;
+    private Flipper _flipper;
+    
 
     private void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        _flipper = GetComponent<Flipper>();
+        _patroller = GetComponent<Patroller>();
     }
 
     private void Update()
     {
-        Move();
+        LookAround();
     }
 
-    private IEnumerator LingerOnGoal()
+    private Vector2 Harassment()
     {
-        WaitForSeconds delay = new WaitForSeconds(_delay);
+        Vector2 target = new ();
+    
+        foreach (Rigidbody2D observationObject in GetExplodableObjects())
+        {
+            target = observationObject.transform.position;
+        }
 
-        _animator.SetBool(PlayerAnimatorData.Params.IsWalk, false);
-        
-        float defaultSpeed = _speed;
-        
-        float zeroSpeed = 0;
-        
-        _speed = zeroSpeed;
-        
-        NextTargetPosition();
-        
-        yield return delay;
-
-        _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
-        
-        _speed = defaultSpeed;
+        return target;
     }
     
-    private void Move()
+    private List<Rigidbody2D> GetExplodableObjects()
     {
-        Vector3 target = _points[_numberPoint].position;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _observationRadius);
 
-        if (transform.position.x < target.x)
+        List<Rigidbody2D> enemyes = new();
+
+        foreach (Collider2D hit in hits)
+        
+            if (hit.attachedRigidbody != null && hit.TryGetComponent(out Player _))
+            {
+                enemyes.Add(hit.attachedRigidbody);
+            }
+
+        return enemyes;
+    }
+
+    private void LookAround()
+    {
+        if (GetExplodableObjects().Count == 0)
         {
-            _renderer.flipX = false;
+            _patroller.ContinuePatrolling();
         }
         else
         {
-            _renderer.flipX = true;
-        }
-        
-        transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
-        
-        if ((transform.position - target).sqrMagnitude < _epsilon)
-        {
-            StartCoroutine(LingerOnGoal());
-        }
-    }
-
-    private void NextTargetPosition()
-    {
-        _numberPoint ++;
-
-        if (_numberPoint == _points.Length)
-        {
-            _numberPoint = 0;
+            _flipper.PursueTarget(Harassment());
         }
     }
 }

@@ -6,8 +6,18 @@ public class Wallet : MonoBehaviour
 {
     [SerializeField] private int _counteMoney;
     [SerializeField] private TextMeshProUGUI _text;
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Money money))
+        {
+            AddMoney();
+            
+            Destroy(money.gameObject);
+        }
+    }
 
-    public void AddMoney()
+    private void AddMoney()
     {
         _counteMoney++;
         

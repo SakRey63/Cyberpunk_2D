@@ -1,32 +1,33 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Wallet))]
 public class Player : MonoBehaviour
 {
-    private const string Horizontal = "Horizontal";
-    
     [SerializeField] private float _speed;
     [SerializeField] private float _forceJump;
-    [SerializeField] private Wallet _wallet;
-
-    private Vector2 _moveVector;
+    [SerializeField] private InputReader _inputReader;
+    
     private Rigidbody2D _rigidbody2D;
-    private SpriteRenderer _renderer;
     private Animator _animator;
-
-    private bool _isFlipX;
+    private bool _facingRight = true;
     private bool _isPlatform;
-    private float _direction;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        Move();
+        _inputReader.HorizontalWasPressed += Move;
+        _inputReader.JumpWasPressed += JumpLogic;
+    }
+
+    private void OnDisable()
+    {
+        _inputReader.HorizontalWasPressed -= Move;
+        _inputReader.JumpWasPressed -= JumpLogic;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -45,46 +46,38 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Move(int moveDirection)
     {
-        if (other.gameObject.TryGetComponent(out Money _))
+        _rigidbody2D.velocity = new Vector2(moveDirection * _speed, _rigidbody2D.velocity.y);
+
+        if (!_facingRight && moveDirection > 0 )
         {
-            _wallet.AddMoney();
+             _facingRight = !_facingRight;
+            
+             transform.Rotate(0, 180f, 0);
         }
-    }
+        else if (_facingRight && moveDirection < 0)
+        {
+            _facingRight = !_facingRight;
+            
+            transform.Rotate(0, 180f, 0);
+        }
 
-    private void Move()
-    {
-        _renderer.flipX = _isFlipX;
-        
-        _direction = Input.GetAxis(Horizontal);
-        
-        transform.Translate(_direction * _speed * Time.deltaTime, 0, 0);
-
-        if (_direction != 0)
+        if (moveDirection > 0 || moveDirection < 0)
         {
             _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
-            
-            if (_direction < 0)
-            {
-                _isFlipX = true;
-            }
-            else if(_direction > 0)
-            {
-                _isFlipX = false;
-            }
         }
         else
         {
             _animator.SetBool(PlayerAnimatorData.Params.IsWalk, false);
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+    private void JumpLogic()
+    {
+        if (_isPlatform)
         {
-            if (_isPlatform)
-            {
-                _rigidbody2D.AddForce(Vector2.up * _forceJump, ForceMode2D.Impulse);
-            }
+            _rigidbody2D.velocity = (Vector2.up * _forceJump);
         }
     }
 }
