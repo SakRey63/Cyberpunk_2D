@@ -1,17 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
+[RequireComponent(typeof(EnemyMover)),RequireComponent(typeof(Harassment)), RequireComponent(typeof(FlipperEnemy)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(FlipperEnemy))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Scanner _scanner;
     
     private Patroller _patroller;
-    private Flipper _flipper;
+    private Harassment _harassment;
     
     private void Awake()
     {
         _patroller = GetComponent<Patroller>();
-        _flipper = GetComponent<Flipper>();
+        _harassment = GetComponent<Harassment>();
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
         if (_scanner.CountEnemy > 0 )
         {
-            _flipper.PursueTarget(_scanner.Target);
+            _harassment.PursueTarget(_scanner.Target);
         }
         else
         {

@@ -2,23 +2,21 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    private int _countObjects;
-
-    public int Count => _countObjects;
-
+    public bool IsGround { get; private set; }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Platform _))
+        if (other.TryGetComponent<Platform>(out _))
         {
-            _countObjects++;
+            IsGround = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Platform _))
+        if (other.TryGetComponent<Platform>(out _))
         {
-            _countObjects--;
+            IsGround = false;
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
-    private int _countEnemy;
+    private int _countEnemy = 0;
     private Vector2 _target;
 
     public Vector2 Target => _target;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 618960c360271bb45a904fa76ed7edad
+guid: 701b9ace0f567ca45a381008bb1ab92f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Biker_hurt_0
+      name: Icon_01_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 19
-        height: 34
+        x: 2
+        y: 2
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf66e520f5dcb054485e79c492b1ba46
-      internalID: 1786880126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_hurt_1
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 0
-        width: 22
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41db00061f77d6c42b9708ac51658d15
-      internalID: 88118514
+      spriteID: 6990532778af10844938ccdd865ef17d
+      internalID: 1679086325
       vertices: []
       indices: 
       edges: []
@@ -162,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Biker_hurt_0: 1786880126
-      Biker_hurt_1: 88118514
+      Icon_01_0: 1679086325
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

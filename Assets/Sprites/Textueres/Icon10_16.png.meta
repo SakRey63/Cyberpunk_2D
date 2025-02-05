@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 618960c360271bb45a904fa76ed7edad
+guid: 8d1e9f45e567e1c4380f595726846b0f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Biker_hurt_0
+      name: Icon10_16_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 19
-        height: 34
+        x: 3
+        y: 3
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf66e520f5dcb054485e79c492b1ba46
-      internalID: 1786880126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_hurt_1
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 0
-        width: 22
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41db00061f77d6c42b9708ac51658d15
-      internalID: 88118514
+      spriteID: c8179292a5ff7e446b44fb2bbc84c924
+      internalID: 1504108307
       vertices: []
       indices: 
       edges: []
@@ -162,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Biker_hurt_0: 1786880126
-      Biker_hurt_1: 88118514
+      Icon10_16_0: 1504108307
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,11 +10,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Transform[] _baseballPlayerPatrolPoints;
     [SerializeField] private Transform[] _skateboarderPatrolPoints;
     [SerializeField] private Money _money;
+    [SerializeField] private MedicineChest _medicineChest;
     [SerializeField] private int _poolCapacity = 5;
-    [SerializeField] private int _poolMaxSize = 10;
-    [SerializeField] private float _delay = 1.5f;
+    [SerializeField] private int _poolMaxSize = 20;
+    [SerializeField] private float _delaySpawnMoney = 1.5f;
+    [SerializeField] private float _delaySpawrMedicineChest = 10f;
 
-    private ObjectPool<Money> _pool;
+    private ObjectPool<Money> _poolMoney;
+    private ObjectPool<MedicineChest> _poolMedicineChest;
 
     private List<Transform[]> _transforms;
     
@@ -27,11 +30,21 @@ public class Spawner : MonoBehaviour
             _baseballPlayerPatrolPoints
         };
              
-        _pool = new ObjectPool<Money>(
+        _poolMoney = new ObjectPool<Money>(
             createFunc: () => Instantiate(_money),
-            actionOnGet: (money) => GetAction(money),
+            actionOnGet: (money) => GetAction(money.gameObject),
             actionOnRelease: (money) => money.gameObject.SetActive(false),
             actionOnDestroy: (money) => Destroy(money),
+            collectionCheck: true,
+            defaultCapacity: _poolCapacity,
+            maxSize: _poolMaxSize
+        );
+        
+        _poolMedicineChest = new ObjectPool<MedicineChest>(
+            createFunc: () => Instantiate(_medicineChest),
+            actionOnGet: (medicineChest) => GetAction(medicineChest.gameObject),
+            actionOnRelease: (medicineChest) => medicineChest.gameObject.SetActive(false),
+            actionOnDestroy: (medicineChest) => Destroy(medicineChest),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize
@@ -41,24 +54,49 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnMoney());
+        StartCoroutine(SpawnMedicineChest());
     }
 
     private IEnumerator SpawnMoney()
     {
-        WaitForSeconds delay = new WaitForSeconds(_delay);
+        WaitForSeconds delay = new WaitForSeconds(_delaySpawnMoney);
 
         while (enabled)
         {
-            _pool.Get();
+            _poolMoney.Get();
+
+            yield return delay;
+        }
+    }
+    
+    private IEnumerator SpawnMedicineChest()
+    {
+        WaitForSeconds delay = new WaitForSeconds(_delaySpawrMedicineChest);
+
+        while (enabled)
+        {
+            _poolMedicineChest.Get();
 
             yield return delay;
         }
     }
 
-    private void GetAction(Money money)
+    private void GetAction(GameObject obj)
     {
-        money.transform.position = RandomPositionMoney(GetPlatform());
-        money.gameObject.SetActive(true);
+        if (obj.TryGetComponent(out Money money))
+        {
+            money.WasDiscovered += ReleaseMoney;
+        }
+        
+        obj.transform.position = RandomPositionMoney(GetPlatform());
+        obj.gameObject.SetActive(true);
+    }
+
+    private void ReleaseMoney(Money money)
+    {
+        money.WasDiscovered -= ReleaseMoney;
+        
+        _poolMoney.Release(money);
     }
     
     private Transform[] GetPlatform()

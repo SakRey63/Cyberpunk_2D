@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Jumper : MonoBehaviour
+public class JumperPlayer : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-    
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
