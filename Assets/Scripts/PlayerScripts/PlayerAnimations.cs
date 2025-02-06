@@ -13,4 +13,9 @@ public class PlayerAnimations : MonoBehaviour
     {
         _animator.SetBool(PlayerAnimatorData.Params.IsWalk, isPlaying);
     }
+
+    public void AttackAnimation(bool isPlaying)
+    {
+        _animator.SetBool(PlayerAnimatorData.Params.IsAttack, isPlaying);
+    }
 }

@@ -7,7 +7,10 @@ public class Harassment : MonoBehaviour
     private EnemyMover _enemyMover;
     private Animator _animator;
     private FlipperEnemy _flipperEnemy;
-
+    private bool _isCaughtTarget;
+    
+    public bool IsCaughtTarget => _enemyMover.Finished;
+        
     private void Awake()
     {
         _animator = GetComponent<Animator>();

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ebc05fd5ff6dc274dade52c9143a1a61
+guid: c6a23ea18f9de924ca1945919349d928
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,34 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Biker_run_attack_0
+      name: Skillicon7_16_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 25
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77df462d398f71b429a288db7d423e30
-      internalID: 2053583733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_run_attack_1
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 0
+        x: 6
+        y: 7
         width: 20
-        height: 32
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,92 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46f707f19e6b8744797cf7c50537a639
-      internalID: -327136986
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_run_attack_2
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 36
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5ad7960b09c7ba4cbb91e60bcbc3a10
-      internalID: -679546898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_run_attack_3
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 0
-        width: 35
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a2974295629c5a4f951a4c5a49a34d4
-      internalID: -2056035867
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_run_attack_4
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 23
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78ef516a9b51e2241ac3e2e8f25c95a4
-      internalID: 385835696
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_run_attack_5
-      rect:
-        serializedVersion: 2
-        x: 243
-        y: 0
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5bd83a8c808003342be0391ac098424a
-      internalID: -1720666393
+      spriteID: 2fffbf7ef4fc4fd4c958bcc64e322edc
+      internalID: 1460222685
       vertices: []
       indices: 
       edges: []
@@ -246,12 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Biker_run_attack_0: 2053583733
-      Biker_run_attack_1: -327136986
-      Biker_run_attack_2: -679546898
-      Biker_run_attack_3: -2056035867
-      Biker_run_attack_4: 385835696
-      Biker_run_attack_5: -1720666393
+      Skillicon7_16_0: 1460222685
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
