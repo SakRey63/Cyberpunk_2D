@@ -17,7 +17,6 @@ public class DisplayCounter : MonoBehaviour
         _wallet.WasFullWallet += ChangeNumber;
         _referee.ChangeHealthPlayer += ChangeHealthPlayer;
         _player.WasHeal += ChangeHealthPlayer;
-
     }
 
     private void OnDisable()

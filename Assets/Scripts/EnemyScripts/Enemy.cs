@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(EnemyMover)), RequireComponent(typeof(AttackEnemy)),RequireComponent(typeof(Harassment)), RequireComponent(typeof(FlipperEnemy)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(FlipperEnemy))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Scanner _scanner;
+    [FormerlySerializedAs("_scanner")] [SerializeField] private EnemyVision enemyVision;
     [SerializeField] private int _health = 100;
     [SerializeField] private int _demage = 5;
     
@@ -11,8 +12,6 @@ public class Enemy : MonoBehaviour
     private Harassment _harassment;
     private AttackEnemy _attackEnemy;
     private int _dead = 0;
-
-    public int Health => _health;
     
     private void Awake()
     {
@@ -28,9 +27,9 @@ public class Enemy : MonoBehaviour
 
     private void LookingAround()
     {
-        if (_scanner.CountEnemy > 0 )
+        if (enemyVision.CountEnemy > 0 )
         {
-            _harassment.PursueTarget(_scanner.Target);
+            _harassment.PursueTarget(enemyVision.Target);
 
             if (_harassment.IsCaughtTarget && _attackEnemy.IsAttack)
             {

@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    public bool IsGround { get; private set; }
+    private bool _isGround;
+
+    public bool IsGround => _isGround;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Platform>(out _))
-        {
-            IsGround = true;
+        { 
+            _isGround = true;
         }
     }
 
@@ -16,7 +18,7 @@ public class GroundDetector : MonoBehaviour
     {
         if (other.TryGetComponent<Platform>(out _))
         {
-            IsGround = false;
+            _isGround = false;
         }
     }
 }

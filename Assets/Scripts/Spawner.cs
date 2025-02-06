@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int _poolCapacity = 5;
     [SerializeField] private int _poolMaxSize = 20;
     [SerializeField] private SpawnPoints _spawnPoints;
-    [SerializeField] private float _delaySpawnMoney = 1.5f;
+    [SerializeField] private float _delaySpawnMoney = 2f;
     [SerializeField] private float _delaySpawrMedicineChest = 15f;
     
     private ObjectPool<Money> _poolMoney;
@@ -73,7 +73,6 @@ public class Spawner : MonoBehaviour
         if (obj.TryGetComponent(out Money money))
         {
             money.WasDiscovered += ReleaseMoney;
-            
         }
 
         if (obj.TryGetComponent(out MedicineChest medicine))

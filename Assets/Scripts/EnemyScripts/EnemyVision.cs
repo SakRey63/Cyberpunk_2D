@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Scanner : MonoBehaviour
+public class EnemyVision : MonoBehaviour
 {
     private int _countEnemy = 0;
     private Vector2 _target;

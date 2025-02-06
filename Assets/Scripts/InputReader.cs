@@ -4,17 +4,18 @@ public class InputReader : MonoBehaviour
 {
     private const string Horizontal = "Horizontal";
 
+    private float _direction;
     private bool _isJump;
     private bool _isAttack;
     
     public bool GetIsJump() => GetBoolAsTrigger(ref _isJump);
     public bool GetIsAttack() => GetBoolAsTrigger(ref _isAttack);
-    
-    public float Direction { get; private set; }
+
+    public float Direction => _direction;
 
     private void Update()
     {
-        Direction = Input.GetAxis(Horizontal);
+        _direction = Input.GetAxis(Horizontal);
 
         if (Input.GetKeyDown(KeyCode.W))
         {
