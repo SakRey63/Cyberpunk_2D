@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -16,8 +17,11 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnimations;
     private AttackPlayer _attackPlayer;
     private int _dead = 0;
+    private int _maxHealth = 100;
 
     public int Health => _health;
+
+    public event Action<int> WasHeal;
     
     private void Awake()
     {
@@ -53,6 +57,25 @@ public class Player : MonoBehaviour
         if (other.TryGetComponent<Money>(out _))
         {
             _wallet.AddMoney();
+        }
+        else if (other.TryGetComponent(out MedicineChest medicine))
+        {
+            Healing(medicine);
+        }
+    }
+
+    private void Healing(MedicineChest medicine)
+    {
+        if (_health < _maxHealth)
+        {
+            _health += medicine.Heal;
+
+            if (_health > _maxHealth)
+            {
+                _health = _maxHealth;
+            }
+            
+            WasHeal?.Invoke(_health);
         }
     }
 

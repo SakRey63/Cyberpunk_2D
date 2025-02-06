@@ -8,8 +8,8 @@ public class RefereeGame : MonoBehaviour
     [SerializeField] private EnemyWeapon _weaponSkateboarder;
     [SerializeField] private EnemyWeapon _weaponPBaseballPlayer;
     
-
     public event Action<int> ChangeHealthPlayer;
+    
     private void OnEnable()
     {
         _weaponPlayer.IsAttack += EnemyDamage;
@@ -24,7 +24,6 @@ public class RefereeGame : MonoBehaviour
         _weaponTank.IsAttack -= PlayerDamage;
         _weaponSkateboarder.IsAttack -= PlayerDamage;
         _weaponPBaseballPlayer.IsAttack -= PlayerDamage;
-        
     }
 
     private void EnemyDamage(Enemy enemy, int damage)
