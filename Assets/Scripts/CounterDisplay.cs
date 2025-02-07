@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class DisplayCounter : MonoBehaviour
+public class CounterDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _countMoney;
     [SerializeField] private TextMeshProUGUI _healthPlayer;

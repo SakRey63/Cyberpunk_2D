@@ -1,23 +1,33 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[RequireComponent(typeof(EnemyMover)), RequireComponent(typeof(AttackEnemy)),RequireComponent(typeof(Harassment)), RequireComponent(typeof(FlipperEnemy)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(FlipperEnemy))]
+[RequireComponent(typeof(EnemyMover)),RequireComponent(typeof(Stalker)), RequireComponent(typeof(Flipper)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
 public class Enemy : MonoBehaviour
 {
-    [FormerlySerializedAs("_scanner")] [SerializeField] private EnemyVision enemyVision;
+    [SerializeField] private EnemyVision _enemyVision;
+    [SerializeField] private EnemyWeapon _weapon;
     [SerializeField] private int _health = 100;
     [SerializeField] private int _demage = 5;
     
     private Patroller _patroller;
-    private Harassment _harassment;
-    private AttackEnemy _attackEnemy;
+    private Stalker _stalker;
     private int _dead = 0;
+    
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        
+        Debug.Log(name + " - Мое здоровье: " + _health);
+
+        if (_health <= _dead)
+        {
+            Dead();
+        }
+    }
     
     private void Awake()
     {
         _patroller = GetComponent<Patroller>();
-        _harassment = GetComponent<Harassment>();
-        _attackEnemy = GetComponent<AttackEnemy>();
+        _stalker = GetComponent<Stalker>();
     }
 
     private void Update()
@@ -27,11 +37,11 @@ public class Enemy : MonoBehaviour
 
     private void LookingAround()
     {
-        if (enemyVision.CountEnemy > 0 )
+        if (_enemyVision.IsDetected)
         {
-            _harassment.PursueTarget(enemyVision.Target);
-
-            if (_harassment.IsCaughtTarget && _attackEnemy.IsAttack)
+            _stalker.PursueTarget(_enemyVision.Target);
+            
+            if (_stalker.IsCaughtTarget)
             {
                 Attack();
             }
@@ -44,23 +54,12 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        _attackEnemy.Attack(_demage);
+        _weapon.gameObject.SetActive(true);
+        _weapon.LaunchAttack();
     }
 
     private void Dead()
     {
         Destroy(gameObject);
-    }
-    
-    public void TakeDamage(int damage)
-    {
-        _health -= damage;
-        
-        Debug.Log(name + " - Мое здоровье: " + _health);
-
-        if (_health <= _dead)
-        {
-            Dead();
-        }
     }
 }

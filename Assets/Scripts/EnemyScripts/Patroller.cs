@@ -11,13 +11,29 @@ public class Patroller : MonoBehaviour
     private int _numberPoint = 0;
     private Animator _animator;
     private EnemyMover _enemyMover;
-    private FlipperEnemy _flipperEnemy;
+    private Flipper _flipper;
 
+    public void ContinuePatrolling()
+    {
+        NextTargetPosition();
+    }
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _enemyMover = GetComponent<EnemyMover>();
-        _flipperEnemy = GetComponent<FlipperEnemy>();
+        _flipper = GetComponent<Flipper>();
+    }
+    
+    private IEnumerator TakeBreak()
+    {
+        WaitForSeconds delay = new WaitForSeconds(_delay);
+        
+        _numberPoint = ++_numberPoint % _points.Length;
+       
+        yield return delay;
+        
+        _enemyMover.ContinueMoving();
     }
     
     private void NextTargetPosition()
@@ -35,23 +51,22 @@ public class Patroller : MonoBehaviour
             _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
                         
             _enemyMover.Move(_points[_numberPoint].position, _speed);
-            _flipperEnemy.TurnInOppositeDirection(_points[_numberPoint].position);
+            _flipper.LockAtTarget(MovementDirection(_points[_numberPoint].position));
         }
     }
 
-    private IEnumerator TakeBreak()
+    private float MovementDirection(Vector2 point)
     {
-        WaitForSeconds delay = new WaitForSeconds(_delay);
+        float right = 1;
+        float left = -1;
         
-        _numberPoint = ++_numberPoint % _points.Length;
-       
-        yield return delay;
-        
-        _enemyMover.ContinueMoving();
-    }
-
-    public void ContinuePatrolling()
-    {
-        NextTargetPosition();
+        if (point.x < transform.position.x)
+        {
+            return left;
+        }
+        else
+        {
+            return right;
+        }
     }
 }

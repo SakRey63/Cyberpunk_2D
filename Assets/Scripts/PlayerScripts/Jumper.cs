@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JumperPlayer : MonoBehaviour
+public class Jumper : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 

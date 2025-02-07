@@ -1,37 +1,34 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Money _money;
-    [SerializeField] private MedicineChest _medicineChest;
+    [SerializeField] private Item _medicine;
+    [SerializeField] private Item _money;
     [SerializeField] private int _poolCapacity = 5;
     [SerializeField] private int _poolMaxSize = 20;
     [SerializeField] private SpawnPoints _spawnPoints;
-    [SerializeField] private float _delaySpawnMoney = 2f;
-    [SerializeField] private float _delaySpawrMedicineChest = 15f;
+    [SerializeField] private float _delaySpawnItem = 5f;
     
-    private ObjectPool<Money> _poolMoney;
-    private ObjectPool<MedicineChest> _poolMedicineChest;
+    private ObjectPool<Item> _poolItems;
+
+    private List<Item> _items;
 
     private void Awake()
     {
-        _poolMoney = new ObjectPool<Money>(
-            createFunc: () => Instantiate(_money),
-            actionOnGet: money => GetAction(money.gameObject),
-            actionOnRelease: money => money.gameObject.SetActive(false),
-            actionOnDestroy: money => Destroy(money),
-            collectionCheck: true,
-            defaultCapacity: _poolCapacity,
-            maxSize: _poolMaxSize
-        );
+        _items = new List<Item>()
+        {
+            _money,
+            _medicine
+        };
 
-        _poolMedicineChest = new ObjectPool<MedicineChest>(
-            createFunc: () => Instantiate(_medicineChest),
-            actionOnGet: medicineChest => GetAction(medicineChest.gameObject),
-            actionOnRelease: medicineChest => medicineChest.gameObject.SetActive(false),
-            actionOnDestroy: medicineChest => Destroy(medicineChest),
+        _poolItems = new ObjectPool<Item>(
+            createFunc: () => Instantiate(RandomItem()),
+            actionOnGet: item => GetAction(item),
+            actionOnRelease: item => item.gameObject.SetActive(false),
+            actionOnDestroy: item => Destroy(item),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize
@@ -40,61 +37,38 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnMoney());
-        StartCoroutine(SpawnMedicineChest());
+        StartCoroutine(SpawnItems());
     }
 
-    private IEnumerator SpawnMoney()
+    private IEnumerator SpawnItems()
     {
-        WaitForSeconds delay = new WaitForSeconds(_delaySpawnMoney);
+        WaitForSeconds delay = new WaitForSeconds(_delaySpawnItem);
 
         while (enabled)
         {
-            _poolMoney.Get();
-            
+            _poolItems.Get();
+
             yield return delay;
         }
     }
     
-    private IEnumerator SpawnMedicineChest()
+    private Item RandomItem()
     {
-        WaitForSeconds delay = new WaitForSeconds(_delaySpawrMedicineChest);
-
-        while (enabled)
-        {
-            _poolMedicineChest.Get();
-
-            yield return delay;
-        }
-    }
-        
-    private void GetAction(GameObject obj)
-    {
-        if (obj.TryGetComponent(out Money money))
-        {
-            money.WasDiscovered += ReleaseMoney;
-        }
-
-        if (obj.TryGetComponent(out MedicineChest medicine))
-        {
-            medicine.WasApplied += ReleaseMedicineChest;
-        }
-        
-        obj.transform.position = _spawnPoints.RandomPosition();
-        obj.gameObject.SetActive(true);
-    }
-
-    private void ReleaseMedicineChest(MedicineChest medicine)
-    {
-        medicine.WasApplied -= ReleaseMedicineChest;
-        
-        _poolMedicineChest.Release(medicine);
+        return _items[Random.Range(0, _items.Count)];
     }
     
-    private void ReleaseMoney(Money money)
+    private void GetAction(Item item)
     {
-        money.WasDiscovered -= ReleaseMoney;
+        item.WasApplied += ReleaseMedicineChest;
         
-        _poolMoney.Release(money);
+        item.transform.position = _spawnPoints.RandomPosition();
+        item.gameObject.SetActive(true);
+    }
+
+    private void ReleaseMedicineChest(Item item)
+    {
+        item.WasApplied -= ReleaseMedicineChest;
+        
+        _poolItems.Release(item);
     }
 }

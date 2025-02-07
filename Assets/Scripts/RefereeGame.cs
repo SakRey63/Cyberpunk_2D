@@ -12,18 +12,18 @@ public class RefereeGame : MonoBehaviour
     
     private void OnEnable()
     {
-        _weaponPlayer.IsAttack += EnemyDamage;
-        _weaponTank.IsAttack += PlayerDamage;
-        _weaponSkateboarder.IsAttack += PlayerDamage;
-        _weaponPBaseballPlayer.IsAttack += PlayerDamage;
+        _weaponPlayer.IsHit += EnemyDamage;
+        _weaponTank.IsHit += PlayerDamage;
+        _weaponSkateboarder.IsHit += PlayerDamage;
+        _weaponPBaseballPlayer.IsHit += PlayerDamage;
     }
 
     private void OnDisable()
     {
-        _weaponPlayer.IsAttack -= EnemyDamage;
-        _weaponTank.IsAttack -= PlayerDamage;
-        _weaponSkateboarder.IsAttack -= PlayerDamage;
-        _weaponPBaseballPlayer.IsAttack -= PlayerDamage;
+        _weaponPlayer.IsHit -= EnemyDamage;
+        _weaponTank.IsHit -= PlayerDamage;
+        _weaponSkateboarder.IsHit -= PlayerDamage;
+        _weaponPBaseballPlayer.IsHit -= PlayerDamage;
     }
 
     private void EnemyDamage(Enemy enemy, int damage)

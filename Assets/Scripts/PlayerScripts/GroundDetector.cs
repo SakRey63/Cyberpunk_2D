@@ -2,23 +2,26 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
+    [SerializeField] private float _radiusDetector = 0.6f;
     private bool _isGround;
-
-    public bool IsGround => _isGround;
+    private Collider2D[] _result = new Collider2D[10];
     
-    private void OnTriggerEnter2D(Collider2D other)
+    public bool ScanSoil()
     {
-        if (other.TryGetComponent<Platform>(out _))
-        { 
-            _isGround = true;
-        }
-    }
+        _isGround = false;
+        
+        int numberHits = Physics2D.OverlapCircleNonAlloc(transform.position, _radiusDetector, _result);
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.TryGetComponent<Platform>(out _))
+        for (int i = 0; i < numberHits; i ++)
         {
-            _isGround = false;
+            if (_result[i].TryGetComponent<Platform>(out _))
+            {
+                _isGround = true;
+                
+                break;
+            }
         }
+        
+        return _isGround;
     }
 }

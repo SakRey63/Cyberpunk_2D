@@ -1,35 +1,50 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class WeaponPlayer : MonoBehaviour
 {
-    public int CountEnemies => _enemies.Count;
-
-    public event Action<Enemy, int> IsAttack;
-
-    private List<Enemy> _enemies;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _cooldown = 1f;
+    
+    private bool _isReadyShoot = true;
+    private bool _isHit;
+    
+    public event Action<Enemy, int> IsHit;
+    
+    public void LaunchAttack()
+    {
+        if (_isReadyShoot)
+        {
+            StartCoroutine(Recharge());
+        }
+    }
 
     private void OnEnable()
     {
-        _enemies = new List<Enemy>();
-    }
-
-    private void OnDisable()
-    {
-        _enemies.Clear();
+        _isHit = true;
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        if (_isHit && other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            _enemies.Add(enemy);
+            IsHit?.Invoke(enemy, _damage);
+            
+            _isHit = false;
         }
     }
-
-    public void GetEnemy(int damage)
+    
+    private IEnumerator Recharge()
     {
-        IsAttack?.Invoke(_enemies[0], damage);
+        WaitForSeconds delay = new WaitForSeconds(_cooldown);
+        
+        _isReadyShoot = false;
+        
+        yield return delay;
+
+        _isReadyShoot = true;
+        
+        gameObject.SetActive(false);
     }
 }

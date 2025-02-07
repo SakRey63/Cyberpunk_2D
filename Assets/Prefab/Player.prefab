@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2588908551448404380}
   - component: {fileID: 4516952579382314217}
-  - component: {fileID: 2830958873542705708}
+  - component: {fileID: 2984298184088163658}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -68,7 +68,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.20669252, y: 0.14551085}
   m_Size: {x: 0.47417775, y: 0.17984863}
   m_Direction: 1
---- !u!114 &2830958873542705708
+--- !u!114 &2984298184088163658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,9 +77,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3179238875248594185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb7a88c97f18dee408d3da9fee387b7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 128b04b652ff3a544a98764133b91d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 10
+  _cooldown: 1
 --- !u!1 &5930136278923926607
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,8 +100,7 @@ GameObject:
   - component: {fileID: 3166420377880832417}
   - component: {fileID: 8919985661192746099}
   - component: {fileID: 8011499663980401914}
-  - component: {fileID: 386141141553091696}
-  - component: {fileID: 8372093328994459484}
+  - component: {fileID: 3519052681057293675}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -323,6 +324,7 @@ MonoBehaviour:
   _inputReader: {fileID: 0}
   _detector: {fileID: 5793458158999323551}
   _wallet: {fileID: 0}
+  _weapon: {fileID: 2984298184088163658}
 --- !u!114 &3166420377880832417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc189dc0ebf6964e9896edac490d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &386141141553091696
+--- !u!114 &3519052681057293675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,22 +370,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5930136278923926607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6314fe9b213844089ca8e4ce248511, type: 3}
+  m_Script: {fileID: 11500000, guid: 7972b282871fc42468d4c43c54eba548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8372093328994459484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930136278923926607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f0b1f1447d1dd746b7ba2bb5b92a534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPlayer: {fileID: 2830958873542705708}
 --- !u!1 &7774186733262774813
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90841c9807238cd44847c94b81617db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radiusDetector: 0.6
 --- !u!70 &2694340481999729992
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Harassment : MonoBehaviour
+public class Stalker : MonoBehaviour
 {
     [SerializeField] private float _speed = 4;
     
     private EnemyMover _enemyMover;
     private Animator _animator;
-    private FlipperEnemy _flipperEnemy;
+    private Flipper _flipper;
     private bool _isCaughtTarget;
     
     public bool IsCaughtTarget => _enemyMover.Finished;
@@ -15,7 +15,7 @@ public class Harassment : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _enemyMover = GetComponent<EnemyMover>();
-        _flipperEnemy = GetComponent<FlipperEnemy>();
+        _flipper = GetComponent<Flipper>();
     }
 
     public void PursueTarget(Vector2 target)
@@ -23,6 +23,22 @@ public class Harassment : MonoBehaviour
         _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
             
         _enemyMover.Move(target, _speed);
-        _flipperEnemy.TurnInOppositeDirection(target);
+        
+        _flipper.LockAtTarget(MovementDirection(target));
+    }
+    
+    private float MovementDirection(Vector2 point)
+    {
+        float right = 1;
+        float left = -1;
+        
+        if (point.x < transform.position.x)
+        {
+            return left;
+        }
+        else
+        {
+            return right;
+        }
     }
 }

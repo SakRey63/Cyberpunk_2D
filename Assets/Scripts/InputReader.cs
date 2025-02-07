@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
@@ -7,9 +8,9 @@ public class InputReader : MonoBehaviour
     private float _direction;
     private bool _isJump;
     private bool _isAttack;
-    
-    public bool GetIsJump() => GetBoolAsTrigger(ref _isJump);
-    public bool GetIsAttack() => GetBoolAsTrigger(ref _isAttack);
+
+    public event Action<bool> IsJump;
+    public event Action<bool> IsAttack;
 
     public float Direction => _direction;
 
@@ -20,18 +21,15 @@ public class InputReader : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             _isJump = true;
+            
+            IsJump?.Invoke(_isJump);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             _isAttack = true;
+            
+            IsAttack?.Invoke(_isAttack);
         }
-    }
-
-    private bool GetBoolAsTrigger(ref bool value)
-    {
-        bool localValue = value;
-        value = false;
-        return localValue;
     }
 }
