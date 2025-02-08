@@ -17,7 +17,7 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    public void ContinueMoving()
+    public void ContinueMove()
     {
         _isFinished = false;
     }

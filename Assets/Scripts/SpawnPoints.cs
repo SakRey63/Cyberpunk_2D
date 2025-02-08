@@ -9,11 +9,11 @@ public class SpawnPoints : MonoBehaviour
     [SerializeField] private Transform[] _baseballPlayerPatrolPoints;
     [SerializeField] private Transform[] _skateboarderPatrolPoints;
     
-    private List<Transform[]> _transforms;
+    private List<Transform[]> _transformsLevelPlatforms;
     
     public Vector2 RandomPosition()
     {
-        Transform[] points = GetPlatform();
+        Transform[] points = GetLevelPlatformSpawn();
         
         float numberPointX = Random.Range(points[0].transform.position.x, points[points.Length - 1].transform.position.x);
         float numberPointY = points[0].transform.position.y;
@@ -23,7 +23,7 @@ public class SpawnPoints : MonoBehaviour
     
     private void Awake()
     {
-        _transforms = new List<Transform[]>()
+        _transformsLevelPlatforms = new List<Transform[]>()
         {
             _skateboarderPatrolPoints,
             _tankPatrolPoints,
@@ -31,10 +31,10 @@ public class SpawnPoints : MonoBehaviour
         };
     }
     
-    private Transform[] GetPlatform()
+    private Transform[] GetLevelPlatformSpawn()
     {
-        int index = Random.Range(0, _transforms.Count);
+        int index = Random.Range(0, _transformsLevelPlatforms.Count);
 
-        return _transforms[index];
+        return _transformsLevelPlatforms[index];
     }
 }

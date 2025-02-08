@@ -13,11 +13,6 @@ public class Patroller : MonoBehaviour
     private EnemyMover _enemyMover;
     private Flipper _flipper;
 
-    public void ContinuePatrolling()
-    {
-        SetNextTargetPosition();
-    }
-    
     private void Awake()
     {
         _animator = GetComponent<EnemyAnimator>();
@@ -33,7 +28,12 @@ public class Patroller : MonoBehaviour
        
         yield return delay;
         
-        _enemyMover.ContinueMoving();
+        _enemyMover.ContinueMove();
+    }
+    
+    public void ContinuePatroller()
+    {
+        SetNextTargetPosition();
     }
     
     private void SetNextTargetPosition()

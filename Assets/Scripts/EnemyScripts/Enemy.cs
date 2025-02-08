@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            _patroller.ContinuePatrolling();
+            _patroller.ContinuePatroller();
         }
 
         if (_healthEnemy.IsDead)
