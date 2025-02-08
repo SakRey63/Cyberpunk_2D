@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyVision : MonoBehaviour
 {
-    private bool _isDetected = false;
+    private bool _isDetected;
     private Vector2 _target;
 
     public Vector2 Target => _target;
@@ -25,6 +25,4 @@ public class EnemyVision : MonoBehaviour
             _isDetected = false;
         }
     }
-    
-    
 }
