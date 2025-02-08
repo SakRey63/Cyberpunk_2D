@@ -5,8 +5,7 @@ public class Patroller : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _delay = 2.0f;
-
-    private float _stopSpeed = 0;
+    
     private int _numberPoint = 0;
     private EnemyAnimator _animator;
     private EnemyMover _enemyMover;

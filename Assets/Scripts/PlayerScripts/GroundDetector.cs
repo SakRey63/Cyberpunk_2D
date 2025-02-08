@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    [SerializeField] private float _radiusDetector = 0.6f;
-    
     private bool _isGround;
 
     public bool IsGround => _isGround;
