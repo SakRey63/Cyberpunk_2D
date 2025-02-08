@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public event Action<Item> WasApplied;
+    [SerializeField] private string _name;
+    
+    private int _heal = 25;
+    
+    public string Name => _name;
+    public int Heal => _heal;
+    
+    public event Action<Item> Applied;
 
     public void ApplyTreatment()
     {
-        WasApplied?.Invoke(this);
+        Applied?.Invoke(this);
     }
 }

@@ -133,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e5c723a0692be4aad989a5ef02529e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Medicine

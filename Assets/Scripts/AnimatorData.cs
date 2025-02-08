@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class PlayerAnimatorData
+public static class AnimatorData
 {
     public static class Params
     {

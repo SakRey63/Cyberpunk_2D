@@ -97,9 +97,8 @@ GameObject:
   - component: {fileID: 3346542512064699190}
   - component: {fileID: 635461696703742281}
   - component: {fileID: 4250664606723819306}
-  - component: {fileID: 1195822111704053260}
   - component: {fileID: 1765947134994500289}
-  - component: {fileID: 2495797175697793816}
+  - component: {fileID: 7007939946393791488}
   m_Layer: 0
   m_Name: BaseballPlayer
   m_TagString: Untagged
@@ -271,9 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99725c87400111948ae5543ff8de003e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyVision: {fileID: 5332545469320079061}
-  _health: 100
-  _demage: 5
+  _enemyVision: {fileID: 0}
+  _weapon: {fileID: 0}
 --- !u!114 &3346542512064699190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,19 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7972b282871fc42468d4c43c54eba548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1195822111704053260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4374410581580043783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caaf375615bcf6d41b6695e616321434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyWeapon: {fileID: 6578199542297148416}
 --- !u!114 &1765947134994500289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
---- !u!114 &2495797175697793816
+--- !u!114 &7007939946393791488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,12 +335,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4374410581580043783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d861ae9214a89da45bb517c6021cf353, type: 3}
+  m_Script: {fileID: 11500000, guid: 697a13fbdd063b14d99f51759fa2ed66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: []
-  _speed: 3
-  _delay: 2
+  _health: 100
 --- !u!1 &5594048259564861834
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,3 +419,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9e42b19c44034408f91ff886f72e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 0
+  _cooldown: 1

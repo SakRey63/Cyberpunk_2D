@@ -4,7 +4,7 @@ public class GroundDetector : MonoBehaviour
 {
     [SerializeField] private float _radiusDetector = 0.6f;
     private bool _isGround;
-    private Collider2D[] _result = new Collider2D[10];
+    private Collider2D[] _result = new Collider2D[5];
     
     public bool ScanSoil()
     {

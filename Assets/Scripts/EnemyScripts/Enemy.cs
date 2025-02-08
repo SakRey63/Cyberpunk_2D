@@ -1,31 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover)),RequireComponent(typeof(Stalker)), RequireComponent(typeof(Flipper)), RequireComponent(typeof(Patroller)), RequireComponent(typeof(Flipper))]
+[RequireComponent(typeof(Health)),RequireComponent(typeof(Stalker)), RequireComponent(typeof(Patroller))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyVision _enemyVision;
     [SerializeField] private EnemyWeapon _weapon;
-    [SerializeField] private int _health = 100;
-    [SerializeField] private int _demage = 5;
     
+    private Health _healthEnemy;
     private Patroller _patroller;
     private Stalker _stalker;
     private int _dead = 0;
     
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-        
-        Debug.Log(name + " - Мое здоровье: " + _health);
-
-        if (_health <= _dead)
-        {
-            Dead();
-        }
+        _healthEnemy.TakeDamage(damage);
     }
     
     private void Awake()
     {
+        _healthEnemy = GetComponent<Health>();
         _patroller = GetComponent<Patroller>();
         _stalker = GetComponent<Stalker>();
     }
@@ -49,6 +42,11 @@ public class Enemy : MonoBehaviour
         else
         {
             _patroller.ContinuePatrolling();
+        }
+
+        if (_healthEnemy.IsDead)
+        {
+            Dead();
         }
     }
 

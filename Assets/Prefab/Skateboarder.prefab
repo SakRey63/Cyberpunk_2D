@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9e42b19c44034408f91ff886f72e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 0
+  _cooldown: 1
 --- !u!1 &6616805870667764792
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,9 +179,8 @@ GameObject:
   - component: {fileID: 7475631043249572953}
   - component: {fileID: 8644527804912752463}
   - component: {fileID: 4213828067173755585}
-  - component: {fileID: 8543550464946418066}
   - component: {fileID: 9199105625847204312}
-  - component: {fileID: 8411458006861942474}
+  - component: {fileID: 3373529818410740340}
   m_Layer: 0
   m_Name: Skateboarder
   m_TagString: Untagged
@@ -351,9 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99725c87400111948ae5543ff8de003e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyVision: {fileID: 6079335759203886014}
-  _health: 100
-  _demage: 5
+  _enemyVision: {fileID: 6079335759203886014}
+  _weapon: {fileID: 4302240175506373868}
 --- !u!114 &7475631043249572953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,19 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7972b282871fc42468d4c43c54eba548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8543550464946418066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6616805870667764792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caaf375615bcf6d41b6695e616321434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyWeapon: {fileID: 4302240175506373868}
 --- !u!114 &9199105625847204312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
---- !u!114 &8411458006861942474
+--- !u!114 &3373529818410740340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,9 +417,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6616805870667764792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d861ae9214a89da45bb517c6021cf353, type: 3}
+  m_Script: {fileID: 11500000, guid: 697a13fbdd063b14d99f51759fa2ed66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: []
-  _speed: 3
-  _delay: 2
+  _health: 100

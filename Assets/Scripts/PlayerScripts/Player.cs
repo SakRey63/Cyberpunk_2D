@@ -1,43 +1,42 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour
 {
+    private const string Money = "Money";
+    private const string Medicine = "Medicine";
+    
     [SerializeField] private float _speed;
     [SerializeField] private float _forceJump = 9f;
-    [SerializeField] private int _health = 100;
-    [SerializeField] private int _damage = 10;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private GroundDetector _detector;
     [SerializeField] private Wallet _wallet;
     [SerializeField] private WeaponPlayer _weapon;
     
+    private Health _health;
     private Jumper _jumper;
     private Flipper _flipper;
     private MoverPlayer _moverPlayer;
     private PlayerAnimations _playerAnimations;
-    private int _dead = 0;
-    private int _heal = 25;
-    private int _maxHealth = 100;
     private bool _isJump = false;
     private bool _isAttack = false;
 
-    public int Health => _health;
+    public int HealthPlayer => _health.HealthCount;
 
-    public event Action<int> WasHeal;
+    public event Action<int> OnHeal;
+    public event Action<int> OnDamage; 
     
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-
-        if (_health <= _dead)
-        {
-            Dead();
-        }
+        _health.TakeDamage(damage);
+        
+        OnDamage?.Invoke(_health.HealthCount);
     }
     
     private void Awake()
     {
+        _health = GetComponent<Health>();
         _playerAnimations = GetComponent<PlayerAnimations>();
         _flipper = GetComponent<Flipper>();
         _jumper = GetComponent<Jumper>();
@@ -46,14 +45,14 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputReader.IsAttack += WasInputAttack;
-        _inputReader.IsJump += WasInputJump;
+        _inputReader.IsAttack += OnInputAttack;
+        _inputReader.IsJump += OnInputJump;
     }
 
     private void OnDisable()
     {
-        _inputReader.IsAttack -= WasInputAttack;
-        _inputReader.IsJump -= WasInputJump;
+        _inputReader.IsAttack -= OnInputAttack;
+        _inputReader.IsJump -= OnInputJump;
     }
 
     private void FixedUpdate()
@@ -81,51 +80,53 @@ public class Player : MonoBehaviour
 
             _isAttack = false;
         }
+
+        if (_health.IsDead)
+        {
+            Dead();
+        }
         
         _playerAnimations.MoveAnimation(_inputReader.Direction != 0);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Money>(out _))
+        if (other.TryGetComponent(out Item item))
         {
-            _wallet.AddMoney();
-            
-            if(other.TryGetComponent(out Item item))
+            if (item.Name == Money)
             {
+                _wallet.AddMoney();
+                
                 item.ApplyTreatment();
             }
-        }
-        else if(other.TryGetComponent(out Item item))
-        {
-            Healing(item);
+            else if (item.Name == Medicine)
+            {
+                Healing(item);
+            }
         }
     }
 
-    private void WasInputJump(bool jump)
+    private void OnInputJump(bool jump)
     {
         _isJump = jump;
     }
     
-    private void WasInputAttack(bool attack)
+    private void OnInputAttack(bool attack)
     {
         _isAttack = attack;
     }
 
     private void Healing(Item medicine)
     {
-        if (_health < _maxHealth)
+        _health.Healing(medicine.Heal);
+        
+        if (_health.IsHeal)
         {
-            _health += _heal;
-
             medicine.ApplyTreatment();
-
-            if (_health > _maxHealth)
-            {
-                _health = _maxHealth;
-            }
             
-            WasHeal?.Invoke(_health);
+            OnHeal?.Invoke(_health.HealthCount);
+
+            _health.HealingIsOver();
         }
     }
 

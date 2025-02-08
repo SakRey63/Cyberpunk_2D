@@ -5,7 +5,7 @@ public class Stalker : MonoBehaviour
     [SerializeField] private float _speed = 4;
     
     private EnemyMover _enemyMover;
-    private Animator _animator;
+    private EnemyAnimator _animator;
     private Flipper _flipper;
     private bool _isCaughtTarget;
     
@@ -13,14 +13,14 @@ public class Stalker : MonoBehaviour
         
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<EnemyAnimator>();
         _enemyMover = GetComponent<EnemyMover>();
         _flipper = GetComponent<Flipper>();
     }
 
     public void PursueTarget(Vector2 target)
     {
-        _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
+        _animator.MoveAnimation(true);
             
         _enemyMover.Move(target, _speed);
         

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,8 +8,7 @@ public class EnemyWeapon : MonoBehaviour
     
     private bool _isReadyShoot = true;
     private bool _isHit;
-    
-    public event Action<Player, int> IsHit;
+    private int _healthPlayer;
     
     public void LaunchAttack()
     {
@@ -25,12 +23,12 @@ public class EnemyWeapon : MonoBehaviour
         _isHit = true;
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (_isHit && other.gameObject.TryGetComponent(out Player player))
+        if (_isHit && other.TryGetComponent(out Player player))
         {
-            IsHit?.Invoke(player, _damage);
-            
+            player.TakeDamage(_damage);
+                        
             _isHit = false;
         }
     }

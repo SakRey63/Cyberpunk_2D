@@ -7,7 +7,6 @@ public class CounterDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _healthPlayer;
     [SerializeField] private Wallet _wallet;
     [SerializeField] private Player _player;
-    [SerializeField] private RefereeGame _referee;
 
     private int _goodHealth = 70;
     private int _badHealth = 30;
@@ -15,15 +14,15 @@ public class CounterDisplay : MonoBehaviour
     private void OnEnable()
     {
         _wallet.WasFullWallet += ChangeNumber;
-        _referee.ChangeHealthPlayer += ChangeHealthPlayer;
-        _player.WasHeal += ChangeHealthPlayer;
+        _player.OnHeal += ChangeHealthPlayer;
+        _player.OnDamage += ChangeHealthPlayer;
     }
 
     private void OnDisable()
     {
         _wallet.WasFullWallet -= ChangeNumber;
-        _referee.ChangeHealthPlayer -= ChangeHealthPlayer;
-        _player.WasHeal -= ChangeHealthPlayer;
+        _player.OnHeal -= ChangeHealthPlayer;
+        _player.OnDamage -= ChangeHealthPlayer;
     }
     
     private void ChangeNumber(int number)

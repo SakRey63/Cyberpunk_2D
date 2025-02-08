@@ -9,18 +9,18 @@ public class Patroller : MonoBehaviour
 
     private float _stopSpeed = 0;
     private int _numberPoint = 0;
-    private Animator _animator;
+    private EnemyAnimator _animator;
     private EnemyMover _enemyMover;
     private Flipper _flipper;
 
     public void ContinuePatrolling()
     {
-        NextTargetPosition();
+        SetNextTargetPosition();
     }
     
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<EnemyAnimator>();
         _enemyMover = GetComponent<EnemyMover>();
         _flipper = GetComponent<Flipper>();
     }
@@ -36,11 +36,11 @@ public class Patroller : MonoBehaviour
         _enemyMover.ContinueMoving();
     }
     
-    private void NextTargetPosition()
+    private void SetNextTargetPosition()
     {
         if (_enemyMover.Finished)
         {
-            _animator.SetBool(PlayerAnimatorData.Params.IsWalk, false);
+            _animator.MoveAnimation(false);
                         
             _enemyMover.Move(_points[_numberPoint].position, _stopSpeed);
             
@@ -48,7 +48,7 @@ public class Patroller : MonoBehaviour
         }
         else
         {
-            _animator.SetBool(PlayerAnimatorData.Params.IsWalk, true);
+            _animator.MoveAnimation(true);
                         
             _enemyMover.Move(_points[_numberPoint].position, _speed);
             _flipper.LockAtTarget(MovementDirection(_points[_numberPoint].position));

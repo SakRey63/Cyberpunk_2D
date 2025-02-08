@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         };
 
         _poolItems = new ObjectPool<Item>(
-            createFunc: () => Instantiate(RandomItem()),
+            createFunc: () => Instantiate(GetRandomItem()),
             actionOnGet: item => GetAction(item),
             actionOnRelease: item => item.gameObject.SetActive(false),
             actionOnDestroy: item => Destroy(item),
@@ -52,14 +52,14 @@ public class Spawner : MonoBehaviour
         }
     }
     
-    private Item RandomItem()
+    private Item GetRandomItem()
     {
         return _items[Random.Range(0, _items.Count)];
     }
     
     private void GetAction(Item item)
     {
-        item.WasApplied += ReleaseMedicineChest;
+        item.Applied += ReleaseMedicineChest;
         
         item.transform.position = _spawnPoints.RandomPosition();
         item.gameObject.SetActive(true);
@@ -67,7 +67,7 @@ public class Spawner : MonoBehaviour
 
     private void ReleaseMedicineChest(Item item)
     {
-        item.WasApplied -= ReleaseMedicineChest;
+        item.Applied -= ReleaseMedicineChest;
         
         _poolItems.Release(item);
     }
