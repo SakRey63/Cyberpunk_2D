@@ -6,11 +6,9 @@ public class InputReader : MonoBehaviour
     private const string Horizontal = "Horizontal";
 
     private float _direction;
-    private bool _isJump;
-    private bool _isAttack;
 
-    public event Action<bool> IsJump;
-    public event Action<bool> IsAttack;
+    public event Action IsJump;
+    public event Action IsAttack;
 
     public float Direction => _direction;
 
@@ -20,16 +18,12 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            _isJump = true;
-            
-            IsJump?.Invoke(_isJump);
+            IsJump?.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _isAttack = true;
-            
-            IsAttack?.Invoke(_isAttack);
+            IsAttack?.Invoke();
         }
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class Patroller : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
-    [SerializeField] private float _speed = 3.0f;
     [SerializeField] private float _delay = 2.0f;
 
     private float _stopSpeed = 0;
@@ -41,8 +40,6 @@ public class Patroller : MonoBehaviour
         if (_enemyMover.Finished)
         {
             _animator.MoveAnimation(false);
-                        
-            _enemyMover.Move(_points[_numberPoint].position, _stopSpeed);
             
             StartCoroutine(TakeBreak());
         }
@@ -50,23 +47,8 @@ public class Patroller : MonoBehaviour
         {
             _animator.MoveAnimation(true);
                         
-            _enemyMover.Move(_points[_numberPoint].position, _speed);
-            _flipper.LockAtTarget(MovementDirection(_points[_numberPoint].position));
-        }
-    }
-
-    private float MovementDirection(Vector2 point)
-    {
-        float right = 1;
-        float left = -1;
-        
-        if (point.x < transform.position.x)
-        {
-            return left;
-        }
-        else
-        {
-            return right;
+            _enemyMover.Move(_points[_numberPoint].position);
+            _flipper.MovementDirection(_points[_numberPoint].position);
         }
     }
 }

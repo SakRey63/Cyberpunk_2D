@@ -4266,6 +4266,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91bdbdf2ce8f338409b0a639c53e078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1146247513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7774186733262774813, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+  m_PrefabInstance: {fileID: 4783158852407412757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1146247517
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146247513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.55}
+  serializedVersion: 2
+  m_Radius: 0.07297182
 --- !u!114 &1149917242 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6322888629185091792, guid: 5327c442251817748b4c67671cdf9243, type: 3}
@@ -5904,11 +5944,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5081854506945258296, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7774186733262774813, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1146247517}
   m_SourcePrefab: {fileID: 100100000, guid: d68dbf59729275e49bff929c0cf8aea0, type: 3}
 --- !u!1001 &5222445507458330395
 PrefabInstance:

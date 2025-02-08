@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Stalker : MonoBehaviour
 {
-    [SerializeField] private float _speed = 4;
-    
     private EnemyMover _enemyMover;
     private EnemyAnimator _animator;
     private Flipper _flipper;
@@ -22,23 +20,8 @@ public class Stalker : MonoBehaviour
     {
         _animator.MoveAnimation(true);
             
-        _enemyMover.Move(target, _speed);
+        _enemyMover.Move(target);
         
-        _flipper.LockAtTarget(MovementDirection(target));
-    }
-    
-    private float MovementDirection(Vector2 point)
-    {
-        float right = 1;
-        float left = -1;
-        
-        if (point.x < transform.position.x)
-        {
-            return left;
-        }
-        else
-        {
-            return right;
-        }
+        _flipper.MovementDirection(target);
     }
 }

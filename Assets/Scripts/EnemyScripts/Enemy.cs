@@ -9,12 +9,6 @@ public class Enemy : MonoBehaviour
     private Health _healthEnemy;
     private Patroller _patroller;
     private Stalker _stalker;
-    private int _dead = 0;
-    
-    public void TakeDamage(int damage)
-    {
-        _healthEnemy.TakeDamage(damage);
-    }
     
     private void Awake()
     {
@@ -28,6 +22,11 @@ public class Enemy : MonoBehaviour
         LookingAround();
     }
 
+    public void TakeDamage(int damage)
+    {
+        _healthEnemy.TakeDamage(damage);
+    }
+    
     private void LookingAround()
     {
         if (_enemyVision.IsDetected)

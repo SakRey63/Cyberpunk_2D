@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
     
     public void Healing(int heal)
     {
-        if (_health < _maxHealth)
+        if (_health < _maxHealth && heal > _dead)
         {
             _isHeal = true;
             

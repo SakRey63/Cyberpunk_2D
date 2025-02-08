@@ -14,4 +14,19 @@ public class Flipper : MonoBehaviour
             transform.rotation *= _lockAtTarget;
         }
     }
+    
+    public void MovementDirection(Vector2 point)
+    {
+        float right = 1;
+        float left = -1;
+        
+        if (point.x < transform.position.x)
+        {
+            LockAtTarget(left);
+        }
+        else
+        {
+            LockAtTarget(right);
+        }
+    }
 }

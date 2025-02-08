@@ -22,17 +22,8 @@ public class Player : MonoBehaviour
     private bool _isJump = false;
     private bool _isAttack = false;
 
-    public int HealthPlayer => _health.HealthCount;
-
     public event Action<int> OnHeal;
     public event Action<int> OnDamage; 
-    
-    public void TakeDamage(int damage)
-    {
-        _health.TakeDamage(damage);
-        
-        OnDamage?.Invoke(_health.HealthCount);
-    }
     
     private void Awake()
     {
@@ -62,12 +53,12 @@ public class Player : MonoBehaviour
             Move(_inputReader.Direction);
         }
  
-        if (_isJump && _detector.ScanSoil() == false)
+        if (_isJump && _detector.IsGround == false)
         {
             _isJump = false;
         }
         
-        if (_isJump && _detector.ScanSoil())
+        if (_isJump && _detector.IsGround)
         {
             Jump();
             
@@ -105,15 +96,22 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    private void OnInputJump(bool jump)
+    
+    public void TakeDamage(int damage)
     {
-        _isJump = jump;
+        _health.TakeDamage(damage);
+        
+        OnDamage?.Invoke(_health.HealthCount);
+    }
+
+    private void OnInputJump()
+    {
+        _isJump = true;
     }
     
-    private void OnInputAttack(bool attack)
+    private void OnInputAttack()
     {
-        _isAttack = attack;
+        _isAttack = true;
     }
 
     private void Healing(Item medicine)

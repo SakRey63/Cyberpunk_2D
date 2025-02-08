@@ -10,14 +10,6 @@ public class EnemyWeapon : MonoBehaviour
     private bool _isHit;
     private int _healthPlayer;
     
-    public void LaunchAttack()
-    {
-        if (_isReadyShoot)
-        {
-            StartCoroutine(Recharge());
-        }
-    }
-
     private void OnEnable()
     {
         _isHit = true;
@@ -33,6 +25,14 @@ public class EnemyWeapon : MonoBehaviour
         }
     }
 
+    public void LaunchAttack()
+    {
+        if (_isReadyShoot)
+        {
+            StartCoroutine(Recharge());
+        }
+    }
+    
     private IEnumerator Recharge()
     {
         WaitForSeconds delay = new WaitForSeconds(_cooldown);

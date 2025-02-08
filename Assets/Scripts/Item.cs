@@ -7,11 +7,11 @@ public class Item : MonoBehaviour
     
     private int _heal = 25;
     
+    public event Action<Item> Applied;
+    
     public string Name => _name;
     public int Heal => _heal;
     
-    public event Action<Item> Applied;
-
     public void ApplyTreatment()
     {
         Applied?.Invoke(this);

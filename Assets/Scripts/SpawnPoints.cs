@@ -11,16 +11,6 @@ public class SpawnPoints : MonoBehaviour
     
     private List<Transform[]> _transformsLevelPlatforms;
     
-    public Vector2 RandomPosition()
-    {
-        Transform[] points = GetLevelPlatformSpawn();
-        
-        float numberPointX = Random.Range(points[0].transform.position.x, points[points.Length - 1].transform.position.x);
-        float numberPointY = points[0].transform.position.y;
-        
-        return new Vector2(numberPointX, numberPointY);
-    }
-    
     private void Awake()
     {
         _transformsLevelPlatforms = new List<Transform[]>()
@@ -29,6 +19,16 @@ public class SpawnPoints : MonoBehaviour
             _tankPatrolPoints,
             _baseballPlayerPatrolPoints
         };
+    }
+    
+    public Vector2 RandomPosition()
+    {
+        Transform[] points = GetLevelPlatformSpawn();
+        
+        float numberPointX = Random.Range(points[0].transform.position.x, points[points.Length - 1].transform.position.x);
+        float numberPointY = points[0].transform.position.y;
+        
+        return new Vector2(numberPointX, numberPointY);
     }
     
     private Transform[] GetLevelPlatformSpawn()

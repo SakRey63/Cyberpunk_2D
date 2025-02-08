@@ -8,14 +8,6 @@ public class WeaponPlayer : MonoBehaviour
     
     private bool _isReadyShoot = true;
     private bool _isHit;
-    
-    public void LaunchAttack()
-    {
-        if (_isReadyShoot)
-        {
-            StartCoroutine(Recharge());
-        }
-    }
 
     private void OnEnable()
     {
@@ -43,5 +35,13 @@ public class WeaponPlayer : MonoBehaviour
         _isReadyShoot = true;
         
         gameObject.SetActive(false);
+    }
+    
+    public void LaunchAttack()
+    {
+        if (_isReadyShoot)
+        {
+            StartCoroutine(Recharge());
+        }
     }
 }
