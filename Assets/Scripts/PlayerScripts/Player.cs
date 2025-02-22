@@ -21,9 +21,6 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnimations;
     private bool _isJump = false;
     private bool _isAttack = false;
-
-    public event Action<int> OnHeal;
-    public event Action<int> OnDamage; 
     
     private void Awake()
     {
@@ -97,11 +94,9 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _health.TakeDamage(damage);
-        
-        OnDamage?.Invoke(_health.HealthCount);
     }
 
     private void OnInputJump()
@@ -121,8 +116,6 @@ public class Player : MonoBehaviour
         if (_health.IsHeal)
         {
             medicine.ApplyTreatment();
-            
-            OnHeal?.Invoke(_health.HealthCount);
 
             _health.HealingIsOver();
         }

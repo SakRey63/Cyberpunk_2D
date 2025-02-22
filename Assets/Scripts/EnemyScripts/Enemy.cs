@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
         LookingAround();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _healthEnemy.TakeDamage(damage);
     }

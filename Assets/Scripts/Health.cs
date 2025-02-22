@@ -1,31 +1,42 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _health = 100;
+    [SerializeField] private float _health = 100;
 
-    private int _maxHealth = 100;
-    private int _dead = 0;
+    private float _maxHealth = 100;
+    private float _dead = 0;
     private bool _isDead = false;
     private bool _isHeal = false;
 
     public bool IsDead => _isDead;
     public bool IsHeal => _isHeal;
-    public int HealthCount => _health;
     
-    public void TakeDamage(int damage)
+    public event Action<float> HealthPoint;
+
+    private void Start()
+    {
+        HealthPoint?.Invoke(_health);
+    }
+
+    public void TakeDamage(float damage)
     {
         _health -= damage;
 
         if (_health <= _dead)
         {
+            _health = _dead;
+            
             _isDead = true;
         }
+        
+        HealthPoint?.Invoke(_health);
     }
     
-    public void Healing(int heal)
+    public void Healing(float heal)
     {
-        if (_health < _maxHealth && heal > _dead)
+        if (_health < _maxHealth && heal > _dead && _isDead == false)
         {
             _isHeal = true;
             
@@ -35,6 +46,8 @@ public class Health : MonoBehaviour
             {
                 _health = _maxHealth;
             }
+            
+            HealthPoint?.Invoke(_health);
         }
     }
 

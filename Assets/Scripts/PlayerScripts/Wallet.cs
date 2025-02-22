@@ -5,7 +5,7 @@ public class Wallet : MonoBehaviour
 {
     [SerializeField] private int _counteMoney;
 
-    public event Action<int> WasFullWallet;
+    public event Action<float> WasFullWallet;
 
     public void AddMoney()
     {

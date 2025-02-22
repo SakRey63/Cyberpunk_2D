@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WeaponPlayer : MonoBehaviour
 {
-    [SerializeField] private int _damage;
+    [SerializeField] private float _damage;
     [SerializeField] private float _cooldown = 1f;
     
     private bool _isReadyShoot = true;
