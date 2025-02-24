@@ -5,52 +5,59 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _health = 100;
 
-    private float _maxHealth = 100;
+    private float _maxValue = 100;
     private float _dead = 0;
     private bool _isDead = false;
     private bool _isHeal = false;
 
+
     public bool IsDead => _isDead;
     public bool IsHeal => _isHeal;
     
-    public event Action<float> HealthPoint;
-
+    public event Action<float> ValueChanged;
+    
     private void Start()
     {
-        HealthPoint?.Invoke(_health);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _health -= damage;
-
-        if (_health <= _dead)
-        {
-            _health = _dead;
-            
-            _isDead = true;
-        }
-        
-        HealthPoint?.Invoke(_health);
+        ValueChanged?.Invoke(_health);
     }
     
-    public void Healing(float heal)
+    public void TakeDamage(float damage)
     {
-        if (_health < _maxHealth && heal > _dead && _isDead == false)
-        {
-            _isHeal = true;
+        if (damage > 0)
+        { 
+            _health -= damage;
             
-            _health += heal;
-
-            if (_health > _maxHealth)
+            if (_health <= _dead)
             {
-                _health = _maxHealth;
+                _health = _dead;
+                        
+                _isDead = true;
             }
+        }
+        
+        ValueChanged?.Invoke(_health);
+    }
+    
+    public void HealPlayer(float heal)
+    {
+        if (heal > 0)
+        {
+            if (_health < _maxValue && _isDead == false)
+            {
+                _health += heal;
             
-            HealthPoint?.Invoke(_health);
+                if (_health > _maxValue)
+                {
+                    _health = _maxValue;
+                }
+
+                _isHeal = true;
+                
+                ValueChanged?.Invoke(_health);
+            }
         }
     }
-
+    
     public void HealingIsOver()
     {
         _isHeal = false;

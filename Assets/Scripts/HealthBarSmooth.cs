@@ -1,39 +1,37 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarSmooth : MonoBehaviour
+public class HealthBarSmooth : HealthView
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Slider _slider;
-    [SerializeField] private float _speed = 70;
+    [SerializeField] private float _delay = 0.7f;
 
-    private float _tempValue;
-    
-    private void OnEnable()
+    protected override void ChangeValue(float health)
     {
-        _health.HealthPoint += ChangeHealthPlayer;
+        StartCoroutine(ChangeSmoothlyValue(health));
     }
 
-    private void OnDisable()
+    private IEnumerator ChangeSmoothlyValue(float health)
     {
-        _health.HealthPoint -= ChangeHealthPlayer;
-    }
-
-    private void Update()
-    {
-        ChangeSmoothHealth();
-    }
-
-    private void ChangeHealthPlayer(float health)
-    {
-        _tempValue = health;
-    }
-
-    private void ChangeSmoothHealth()
-    {
-        if (_slider.value < _tempValue || _slider.value > _tempValue)
+        float elapsedTime = 0;
+        
+        while (elapsedTime < _delay)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, _tempValue, _speed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            
+            _slider.value = Mathf.MoveTowards(_slider.value, health, elapsedTime / _delay);
+            
+            ChangeColor(health);
+            
+            yield return null;
         }
+    }
+    
+    private void ChangeColor(float health)
+    {
+        _slider.fillRect.TryGetComponent(out Image image);
+
+        image.color = base.CreateColor(health);
     }
 }

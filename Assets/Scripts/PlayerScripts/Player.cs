@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 
     private void Healing(Item medicine)
     {
-        _health.Healing(medicine.Heal);
+        _health.HealPlayer(medicine.Heal);
         
         if (_health.IsHeal)
         {
