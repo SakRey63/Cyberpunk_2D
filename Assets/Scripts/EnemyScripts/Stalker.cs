@@ -22,6 +22,6 @@ public class Stalker : MonoBehaviour
             
         _enemyMover.Move(target);
         
-        _flipper.MovementDirection(target);
+        _flipper.ChooseDirection(target);
     }
 }

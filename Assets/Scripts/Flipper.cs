@@ -19,7 +19,7 @@ public class Flipper : MonoBehaviour
         }
     }
     
-    public void MovementDirection(Vector2 point)
+    public void ChooseDirection(Vector2 point)
     {
         float right = 1;
         float left = -1;

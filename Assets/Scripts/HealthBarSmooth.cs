@@ -30,8 +30,9 @@ public class HealthBarSmooth : HealthView
     
     private void ChangeColor(float health)
     {
-        _slider.fillRect.TryGetComponent(out Image image);
-
-        image.color = base.CreateColor(health);
+        if (_slider.fillRect.TryGetComponent(out Image image))
+        {
+            image.color = base.CreateColor(health);
+        }
     }
 }

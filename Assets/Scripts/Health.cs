@@ -9,8 +9,7 @@ public class Health : MonoBehaviour
     private float _dead = 0;
     private bool _isDead = false;
     private bool _isHeal = false;
-
-
+    
     public bool IsDead => _isDead;
     public bool IsHeal => _isHeal;
     
@@ -38,7 +37,7 @@ public class Health : MonoBehaviour
         ValueChanged?.Invoke(_health);
     }
     
-    public void HealPlayer(float heal)
+    public void Heal(float heal)
     {
         if (heal > 0)
         {
@@ -58,7 +57,7 @@ public class Health : MonoBehaviour
         }
     }
     
-    public void HealingIsOver()
+    public void UseHealing()
     {
         _isHeal = false;
     }

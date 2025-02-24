@@ -6,28 +6,28 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyVision _enemyVision;
     [SerializeField] private EnemyWeapon _weapon;
     
-    private Health _healthEnemy;
+    private Health _health;
     private Patroller _patroller;
     private Stalker _stalker;
     
     private void Awake()
     {
-        _healthEnemy = GetComponent<Health>();
+        _health = GetComponent<Health>();
         _patroller = GetComponent<Patroller>();
         _stalker = GetComponent<Stalker>();
     }
 
     private void Update()
     {
-        LookingAround();
+        ChooseStatus();
     }
 
     public void TakeDamage(float damage)
     {
-        _healthEnemy.TakeDamage(damage);
+        _health.TakeDamage(damage);
     }
     
-    private void LookingAround()
+    private void ChooseStatus()
     {
         if (_enemyVision.IsDetected)
         {
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
             _patroller.ContinuePatroller();
         }
 
-        if (_healthEnemy.IsDead)
+        if (_health.IsDead)
         {
             Dead();
         }

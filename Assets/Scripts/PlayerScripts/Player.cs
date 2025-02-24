@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
@@ -89,7 +88,7 @@ public class Player : MonoBehaviour
             }
             else if (item.Name == Medicine)
             {
-                Healing(item);
+                Heal(item);
             }
         }
     }
@@ -109,15 +108,15 @@ public class Player : MonoBehaviour
         _isAttack = true;
     }
 
-    private void Healing(Item medicine)
+    private void Heal(Item medicine)
     {
-        _health.HealPlayer(medicine.Heal);
+        _health.Heal(medicine.Heal);
         
         if (_health.IsHeal)
         {
             medicine.ApplyTreatment();
 
-            _health.HealingIsOver();
+            _health.UseHealing();
         }
     }
 

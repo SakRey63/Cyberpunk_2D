@@ -47,7 +47,8 @@ public class Patroller : MonoBehaviour
             _animator.MoveAnimation(true);
                         
             _enemyMover.Move(_points[_numberPoint].position);
-            _flipper.MovementDirection(_points[_numberPoint].position);
+            
+            _flipper.ChooseDirection(_points[_numberPoint].position);
         }
     }
 }
