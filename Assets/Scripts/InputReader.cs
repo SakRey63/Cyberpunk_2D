@@ -9,6 +9,7 @@ public class InputReader : MonoBehaviour
 
     public event Action IsJump;
     public event Action IsAttack;
+    public event Action IsSpell; 
 
     public float Direction => _direction;
 
@@ -24,6 +25,11 @@ public class InputReader : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             IsAttack?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            IsSpell?.Invoke();
         }
     }
 }

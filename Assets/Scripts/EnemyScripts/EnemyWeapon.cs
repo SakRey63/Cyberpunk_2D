@@ -8,7 +8,6 @@ public class EnemyWeapon : MonoBehaviour
     
     private bool _isReadyShoot = true;
     private bool _isHit;
-    private int _healthPlayer;
     
     private void OnEnable()
     {
@@ -25,14 +24,6 @@ public class EnemyWeapon : MonoBehaviour
         }
     }
 
-    public void LaunchAttack()
-    {
-        if (_isReadyShoot)
-        {
-            StartCoroutine(Recharge());
-        }
-    }
-    
     private IEnumerator Recharge()
     {
         WaitForSeconds delay = new WaitForSeconds(_cooldown);
@@ -44,5 +35,13 @@ public class EnemyWeapon : MonoBehaviour
         _isReadyShoot = true;
 
         gameObject.SetActive(false);
+    }
+    
+    public void LaunchAttack()
+    {
+        if (_isReadyShoot)
+        {
+            StartCoroutine(Recharge());
+        }
     }
 }

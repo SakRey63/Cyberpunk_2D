@@ -15,12 +15,14 @@ public class HealthBarSmooth : HealthView
     private IEnumerator ChangeSmoothlyValue(float health)
     {
         float elapsedTime = 0;
+
+        float numberParts = health / _delay;
         
         while (elapsedTime < _delay)
         {
             elapsedTime += Time.deltaTime;
             
-            _slider.value = Mathf.MoveTowards(_slider.value, health, elapsedTime / _delay);
+            _slider.value = Mathf.MoveTowards(_slider.value, health, numberParts * Time.deltaTime);
             
             ChangeColor(health);
             

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GroundDetector _detector;
     [SerializeField] private Wallet _wallet;
     [SerializeField] private WeaponPlayer _weapon;
+    [SerializeField] private Mana _mana;
     
     private Health _health;
     private Jumper _jumper;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnimations;
     private bool _isJump = false;
     private bool _isAttack = false;
+    private bool _isSpell = false;
     
     private void Awake()
     {
@@ -34,12 +36,14 @@ public class Player : MonoBehaviour
     {
         _inputReader.IsAttack += OnInputAttack;
         _inputReader.IsJump += OnInputJump;
+        _inputReader.IsSpell += OnInputSpell;
     }
 
     private void OnDisable()
     {
         _inputReader.IsAttack -= OnInputAttack;
         _inputReader.IsJump -= OnInputJump;
+        _inputReader.IsSpell -= OnInputSpell;
     }
 
     private void FixedUpdate()
@@ -72,6 +76,13 @@ public class Player : MonoBehaviour
         {
             Dead();
         }
+
+        if (_isSpell)
+        {
+            CastingSpell();
+
+            _isSpell = false;
+        }
         
         _playerAnimations.MoveAnimation(_inputReader.Direction != 0);
     }
@@ -98,6 +109,11 @@ public class Player : MonoBehaviour
         _health.TakeDamage(damage);
     }
 
+    private void OnInputSpell()
+    {
+        _isSpell = true;
+    }
+
     private void OnInputJump()
     {
         _isJump = true;
@@ -120,6 +136,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void CastingSpell()
+    {
+        _mana.Casting();
+    }
+    
     private void Attack()
     {
         _weapon.gameObject.SetActive(true);
