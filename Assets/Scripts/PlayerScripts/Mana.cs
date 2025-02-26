@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Slider = UnityEngine.UI.Slider;
 
 public class Mana : MonoBehaviour
 {
     [SerializeField] private float _amountMana = 100;
-    [SerializeField] private Speel _speel;
+    [FormerlySerializedAs("_speel")] [SerializeField] private Vampirism vampirism;
     [SerializeField] private Slider _slider;
     [SerializeField] private float _timeFilling = 4;
 
@@ -13,12 +14,12 @@ public class Mana : MonoBehaviour
 
     private void OnEnable()
     {
-        _speel.Wasted += RechargeSpell;
+        vampirism.Wasted += RechargeSpell;
     }
 
     private void OnDisable()
     {
-        _speel.Wasted -= RechargeSpell;
+        vampirism.Wasted -= RechargeSpell;
     }
     
     private void Start()
@@ -48,8 +49,8 @@ public class Mana : MonoBehaviour
     {
         if (_isFill)
         {
-            _speel.gameObject.SetActive(true);
-            _speel.Attack();
+            vampirism.gameObject.SetActive(true);
+            vampirism.Attack();
             
             _isFill = false;
         }

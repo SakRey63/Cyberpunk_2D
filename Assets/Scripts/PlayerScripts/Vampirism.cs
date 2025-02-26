@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Speel : MonoBehaviour
+public class Vampirism : MonoBehaviour
 {
     [SerializeField] private float _power = 25;
     [SerializeField] private float _delay = 6;
