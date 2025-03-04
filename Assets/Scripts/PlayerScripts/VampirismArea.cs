@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class VampirismArea : MonoBehaviour
 {
-    private Enemy _enemy;
-    
     private List<Enemy> _enemies;
 
     public int Index => _enemies.Count;
@@ -42,26 +40,23 @@ public class VampirismArea : MonoBehaviour
     public Enemy SelectTarget()
     {
         float tempDistance;
-        
-        if (_enemies.Count > 0)
-        {
-            _enemy = _enemies[0];
-            
-            float distance = GetDirection(_enemies[0]);
-            
-            foreach (Enemy enemy in _enemies)
-            {
-                tempDistance = GetDirection(enemy);
-                
-                if (tempDistance < distance)
-                {
-                    distance = tempDistance;
 
-                    _enemy = enemy;
-                }
+        Enemy enemyTarget = _enemies[0];
+            
+        float distance = GetDirection(_enemies[0]);
+            
+        foreach (Enemy enemy in _enemies)
+        {
+            tempDistance = GetDirection(enemy);
+                
+            if (tempDistance < distance)
+            {
+                distance = tempDistance;
+
+                enemyTarget = enemy;
             }
         }
 
-        return _enemy;
+        return enemyTarget;
     }
 }

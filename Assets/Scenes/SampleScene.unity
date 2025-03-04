@@ -184,17 +184,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1475147543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &155786382 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7429556755482798958, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
-  m_PrefabInstance: {fileID: 7622218182691358169}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f9bfec5fba81e42a49271141aada08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &308034515
 GameObject:
   m_ObjectHideFlags: 0
@@ -4273,6 +4262,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1475147543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1093326288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1585270870566573949, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
+  m_PrefabInstance: {fileID: 7622218182691358169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d843709618295c44cbc1ad5c438c6db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1175399902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5534,6 +5534,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434169406638400657, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
+      propertyPath: m_Name
+      value: PlayerScaner
+      objectReference: {fileID: 0}
     - target: {fileID: 2453587289739116409, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5542,6 +5546,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2462362224316398197, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
+      propertyPath: _scaner
+      value: 
+      objectReference: {fileID: 1093326288}
     - target: {fileID: 2462362224316398197, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
       propertyPath: _vampirism
       value: 
@@ -5553,8 +5561,13 @@ PrefabInstance:
     - target: {fileID: 5428957361953315010, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
       propertyPath: _vampirism
       value: 
-      objectReference: {fileID: 155786382}
-    m_RemovedComponents: []
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072546303171121339, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
+      propertyPath: m_Name
+      value: VampirismBar
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7429556755482798958, guid: 499449db2cd213740b235e8bdc4f9a3c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -12,7 +12,6 @@ public class Vampirism : MonoBehaviour
     [SerializeField] private float _reloadTime = 4;
     [SerializeField] private float _absorbTime = 6;
     
-    private Enemy _enemy;
     private Coroutine _coroutine;
     
     public event Action<float, float> EnergyChanged;
@@ -36,9 +35,9 @@ public class Vampirism : MonoBehaviour
             
             if (_area.Index > 0)
             {
-                _enemy = _area.SelectTarget();
+                Enemy enemy = _area.SelectTarget();
                 
-                _enemy.TakeDamage(numberDelta * Time.deltaTime);
+                enemy.TakeDamage(numberDelta * Time.deltaTime);
                 
                 _health.Heal(numberDelta * Time.deltaTime);
                 
