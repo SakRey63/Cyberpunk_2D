@@ -3,37 +3,31 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour
 {
-    private const string Money = "Money";
-    private const string Medicine = "Medicine";
-    
-    [SerializeField] private float _speed;
-    [SerializeField] private float _forceJump = 9f;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private GroundDetector _detector;
-    [SerializeField] private Wallet _wallet;
     [SerializeField] private WeaponPlayer _weapon;
-    [SerializeField] private Mana _mana;
+    [SerializeField] private Vampirism _vampirism;
+    [SerializeField] private PlayerScaner _scaner;
+    [SerializeField] private Flipper _flipper;
+    [SerializeField] private Animations _animations;
     
     private Health _health;
     private Jumper _jumper;
-    private Flipper _flipper;
     private MoverPlayer _moverPlayer;
-    private PlayerAnimations _playerAnimations;
     private bool _isJump = false;
     private bool _isAttack = false;
-    private bool _isSpell = false;
+    private bool _isVamp = false;
     
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _playerAnimations = GetComponent<PlayerAnimations>();
-        _flipper = GetComponent<Flipper>();
         _jumper = GetComponent<Jumper>();
         _moverPlayer = GetComponent<MoverPlayer>();
     }
 
     private void OnEnable()
     {
+        _scaner.FoundTreatment += Heal;
         _inputReader.IsAttack += OnInputAttack;
         _inputReader.IsJump += OnInputJump;
         _inputReader.IsSpell += OnInputSpell;
@@ -41,6 +35,7 @@ public class Player : MonoBehaviour
 
     private void OnDisable()
     {
+        _scaner.FoundTreatment -= Heal;
         _inputReader.IsAttack -= OnInputAttack;
         _inputReader.IsJump -= OnInputJump;
         _inputReader.IsSpell -= OnInputSpell;
@@ -77,31 +72,14 @@ public class Player : MonoBehaviour
             Dead();
         }
 
-        if (_isSpell)
+        if (_isVamp)
         {
-            CastingSpell();
+            CastingVampirism();
 
-            _isSpell = false;
+            _isVamp = false;
         }
         
-        _playerAnimations.MoveAnimation(_inputReader.Direction != 0);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Item item))
-        {
-            if (item.Name == Money)
-            {
-                _wallet.AddMoney();
-                
-                item.ApplyTreatment();
-            }
-            else if (item.Name == Medicine)
-            {
-                Heal(item);
-            }
-        }
+        _animations.MoveAnimation(_inputReader.Direction != 0);
     }
     
     public void TakeDamage(float damage)
@@ -111,7 +89,7 @@ public class Player : MonoBehaviour
 
     private void OnInputSpell()
     {
-        _isSpell = true;
+        _isVamp = true;
     }
 
     private void OnInputJump()
@@ -136,9 +114,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CastingSpell()
+    private void CastingVampirism()
     {
-        _mana.Casting();
+        _vampirism.UseVampirism();
     }
     
     private void Attack()
@@ -149,14 +127,14 @@ public class Player : MonoBehaviour
 
     private void Move(float direction)
     {
-        _playerAnimations.MoveAnimation(direction != 0);
-        _moverPlayer.Move(direction, _speed);
+        _animations.MoveAnimation(direction != 0);
+        _moverPlayer.Move(direction);
         _flipper.LockAtTarget(direction);
     }
 
     private void Jump()
     {
-        _jumper.Jump(_forceJump);
+        _jumper.Jump();
     }
     
     private void Dead()

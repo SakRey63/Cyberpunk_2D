@@ -5,17 +5,16 @@ public class Patroller : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _delay = 2.0f;
+    [SerializeField] private Animations _animator;
+    [SerializeField] private Flipper _flipper;
     
     private int _numberPoint = 0;
-    private EnemyAnimator _animator;
+    
     private EnemyMover _enemyMover;
-    private Flipper _flipper;
-
+    
     private void Awake()
     {
-        _animator = GetComponent<EnemyAnimator>();
         _enemyMover = GetComponent<EnemyMover>();
-        _flipper = GetComponent<Flipper>();
     }
     
     private IEnumerator TakeBreak()

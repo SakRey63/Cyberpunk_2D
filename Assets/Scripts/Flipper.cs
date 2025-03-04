@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    [SerializeField] private Canvas _canvas;
-    
     private Quaternion _lockAtTarget = Quaternion.Euler(0, 180 , 0);
     private bool _facingRight = true;
     
@@ -14,8 +12,6 @@ public class Flipper : MonoBehaviour
             _facingRight = !_facingRight;
 
             transform.rotation *= _lockAtTarget;
-
-            _canvas.transform.rotation *= _lockAtTarget;
         }
     }
     
